@@ -5,14 +5,15 @@ import org.academiadecodigo.simplegraphics.keyboard.*;
 public class KeyboardController implements KeyboardHandler {
 
     private Brush brush;
-    private Cell cell;
+    private Grid grid;
     private Cell[][] gridCells;
     private Keyboard keyboard;
 
     // Constructor
-    public KeyboardController(Cell[][] gridCells, Brush brush) {
-        this.gridCells = gridCells;
+    public KeyboardController(Grid grid, Brush brush) {
+        this.grid = grid;
         this.brush = brush;
+        gridCells = grid.getGrid();
         assemble();
     }
 
@@ -25,7 +26,9 @@ public class KeyboardController implements KeyboardHandler {
                 KeyboardEvent.KEY_DOWN,
                 KeyboardEvent.KEY_RIGHT,
                 KeyboardEvent.KEY_LEFT,
-                KeyboardEvent.KEY_SPACE
+                KeyboardEvent.KEY_SPACE,
+                KeyboardEvent.KEY_Z,
+                KeyboardEvent.KEY_S
         };
 
         for (int key : keys){
@@ -45,21 +48,33 @@ public class KeyboardController implements KeyboardHandler {
          * Movement Methods
          */
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
+            if (brush.getRow() - 1 < 0) {
+                return;
+            }
             brush.setRow(brush.getRow() - 1);
             brush.move(Direction.UP);
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
+            if (brush.getRow() + 1 > grid.getRows() - 1) {
+                return;
+            }
             brush.setRow(brush.getRow() + 1);
             brush.move(Direction.DOWN);
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
+            if (brush.getCol() + 1 > grid.getCols() - 1) {
+                return;
+            }
             brush.setCol(brush.getCol() + 1);
             brush.move(Direction.RIGHT);
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
+            if (brush.getCol() - 1 < 0) {
+                return;
+            }
             brush.setCol(brush.getCol() - 1);
             brush.move(Direction.LEFT);
         }
@@ -68,7 +83,22 @@ public class KeyboardController implements KeyboardHandler {
          * Paint Commands
          */
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
-            brush.paintCell();
+            gridCells[brush.getRow()][brush.getCol()].useBrush();
+        }
+
+        /**
+         * Reset Grid
+         */
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_Z) {
+            grid.clear();
+        }
+
+        /**
+         * Save and Load methods
+         */
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_S) {
+            System.out.println("Saving file...");
+            grid.save();
         }
 
     }

@@ -52,17 +52,17 @@ public class Cell {
     }
 
     // Methods
-    public int rowToPixel(int row) {
-        return (Grid.getPadding() + (row * size));
+    public void useBrush() {
+        if (!isPainted()) {
+            paintCell();
+        } else {
+            eraseCell();
+        }
     }
 
-    public int colToPixel(int col) {
-        return (Grid.getPadding() + (col * size));
-    }
-
-    public void paintCell() {
-        cellRect.setColor(Color.BLACK);
-        cellRect.fill();
+    private void paintCell() {
+        this.cellRect.setColor(Color.BLACK);
+        this.cellRect.fill();
         setPainted(true);
     }
 

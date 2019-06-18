@@ -1,12 +1,8 @@
 package org.academiadecodigo.whiledcards.paintbrushac;
 
 import org.academiadecodigo.simplegraphics.graphics.*;
-import org.academiadecodigo.simplegraphics.keyboard.*;
-
 
 public class Brush extends Cell {
-
-    private Keyboard keyboard;
 
     public Brush(int col, int row) {
        super(col,row);
@@ -51,8 +47,4 @@ public class Brush extends Cell {
         getCellRect().grow(0.5,0.5);
     }
 
-    @Override
-    public void paintCell() {
-        
-    }
 }
