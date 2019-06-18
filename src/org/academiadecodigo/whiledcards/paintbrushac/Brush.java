@@ -1,17 +1,58 @@
 package org.academiadecodigo.whiledcards.paintbrushac;
 
 import org.academiadecodigo.simplegraphics.graphics.*;
+import org.academiadecodigo.simplegraphics.keyboard.*;
+
 
 public class Brush extends Cell {
 
+    private Keyboard keyboard;
+
     public Brush(int col, int row) {
-       super(10,10);
-       paintCell();
+       super(col,row);
+       highlightBrush();
+    }
+
+    public void move(Direction direction) {
+
+        int x;
+        int y;
+
+        switch (direction) {
+            case UP:
+                x = 0;
+                y = - (1 * Grid.getCellSize());
+                break;
+            case DOWN:
+                x = 0;
+                y = + (1 * Grid.getCellSize());
+                break;
+            case RIGHT:
+                x = + (1 * Grid.getCellSize());
+                y = 0;
+                break;
+            case LEFT:
+                x = - (1 * Grid.getCellSize());
+                y = 0;
+                break;
+            default:
+                x = 0;
+                y = 0;
+        }
+
+        getCellRect().translate(x, y);
+
+    }
+
+    public void highlightBrush() {
+        getCellRect().setColor(Color.GREEN);
+        getCellRect().draw();
+        getCellRect().fill();
+        getCellRect().grow(0.5,0.5);
     }
 
     @Override
     public void paintCell() {
-        getCellRect().setColor(Color.GREEN);
-        getCellRect().fill();
+        
     }
 }

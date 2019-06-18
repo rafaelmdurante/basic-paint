@@ -27,8 +27,16 @@ public class Cell {
         return row;
     }
 
+    public void setRow(int newRow) {
+        row = newRow;
+    }
+
     public int getCol() {
         return col;
+    }
+
+    public void setCol(int newCol) {
+        col = newCol;
     }
 
     public boolean isPainted() {
@@ -59,8 +67,7 @@ public class Cell {
     }
 
     public void eraseCell() {
-        cellRect.setColor(Color.WHITE);
-        cellRect.fill();
+        cellRect.draw();
         setPainted(false);
     }
 
