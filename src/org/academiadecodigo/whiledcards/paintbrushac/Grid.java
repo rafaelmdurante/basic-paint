@@ -1,40 +1,67 @@
 package org.academiadecodigo.whiledcards.paintbrushac;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Grid {
 
+    // Attributes
     private Rectangle outerRect;
-    private Rectangle grid[][];
-    private static final int PADDING = 10;
+    private Cell grid[][];
     private int rows;
     private int cols;
-    private int cellSize;
+    private static final int PADDING = 10;
+    private static int cellSize;
     private int lastState;
 
+    // Constructor
     public Grid(int cols, int rows, int cellSize) {
         this.cols = cols;
         this.rows = rows;
         this.cellSize = cellSize;
-        grid = new Rectangle[rows][cols];
-        createOuterRect(cols, rows);
+        createOuterRect();
+        createGridLogic();
         createCells();
     }
 
-    private void createOuterRect(int cols, int rows) {
-        outerRect = new Rectangle(PADDING, PADDING, cols * cellSize, rows * cellSize);
+    // Getters and Setters
+    /**
+     * Static method to allow other classes to have access to this data
+     * @return
+     */
+    public static int getCellSize() {
+        return cellSize;
+    }
+
+    public static int getPadding() {
+        return PADDING;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public Cell[][] getGrid() {
+        return grid;
+    }
+
+    // Methods
+    private void createOuterRect() {
+        outerRect = new Rectangle(PADDING, PADDING, getCols() * cellSize, getRows() * cellSize);
         outerRect.draw();
+    }
+
+    private void createGridLogic() {
+        grid = new Cell[getRows()][getCols()];
     }
 
     private void createCells() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-
-                grid[row][col] = new Cell()
-
-                grid[row][col] = new Rectangle((PADDING + (col * cellSize)), (PADDING + (row * cellSize)), cellSize, cellSize);
-                grid[row][col].draw();
+                grid[row][col] = new Cell(col, row);
             }
         }
     }

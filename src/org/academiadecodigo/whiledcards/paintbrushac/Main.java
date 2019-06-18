@@ -3,9 +3,9 @@ package org.academiadecodigo.whiledcards.paintbrushac;
 public class Main {
     public static void main(String[] args) {
 
-        Grid g = new Grid(50, 50, 10);
+        Grid g = new Grid(40, 40, 15);
 
-
+        g.getGrid()[1][5].paintCell();
         /*
         boolean painted = false;
 
