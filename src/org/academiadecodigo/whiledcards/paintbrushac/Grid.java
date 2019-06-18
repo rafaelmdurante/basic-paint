@@ -126,9 +126,9 @@ public class Grid {
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                try {
-                    fileReader.read()
-                }
+                //try {
+                  //  fileReader.read()
+                //}
             }
         }
     }
