@@ -39,6 +39,10 @@ public class Cell {
         painted = value;
     }
 
+    public Rectangle getCellRect() {
+        return cellRect;
+    }
+
     // Methods
     public int rowToPixel(int row) {
         return (Grid.getPadding() + (row * size));
@@ -51,6 +55,13 @@ public class Cell {
     public void paintCell() {
         cellRect.setColor(Color.BLACK);
         cellRect.fill();
+        setPainted(true);
+    }
+
+    public void eraseCell() {
+        cellRect.setColor(Color.WHITE);
+        cellRect.fill();
+        setPainted(false);
     }
 
 }

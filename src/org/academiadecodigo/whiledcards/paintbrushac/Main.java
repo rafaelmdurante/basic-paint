@@ -5,7 +5,6 @@ public class Main {
 
         Grid g = new Grid(40, 40, 15);
 
-        g.getGrid()[1][5].paintCell();
         /*
         boolean painted = false;
 
