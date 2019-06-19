@@ -7,7 +7,6 @@ public class Cell {
 
     // Attributes
     private int size;
-    private boolean painted;
     private int row;
     private int col;
     private Rectangle cellRect;
@@ -17,7 +16,6 @@ public class Cell {
         size = Grid.getCellSize();
         this.col = col;
         this.row = row;
-        painted = false;
         cellRect = new Rectangle( (Grid.getPadding() + (col * size)), (Grid.getPadding() + (row * size)), size, size);
         cellRect.draw();
     }
@@ -40,11 +38,7 @@ public class Cell {
     }
 
     public boolean isPainted() {
-        return painted;
-    }
-
-    public void setPainted(boolean value) {
-        painted = value;
+        return cellRect.isFilled();
     }
 
     public Rectangle getCellRect() {
@@ -53,7 +47,7 @@ public class Cell {
 
     // Methods
     public void useBrush() {
-        if (!isPainted()) {
+        if (!getCellRect().isFilled()) {
             paintCell();
         } else {
             eraseCell();
@@ -63,12 +57,10 @@ public class Cell {
     private void paintCell() {
         this.cellRect.setColor(Color.BLACK);
         this.cellRect.fill();
-        setPainted(true);
     }
 
     public void eraseCell() {
         cellRect.draw();
-        setPainted(false);
     }
 
 }

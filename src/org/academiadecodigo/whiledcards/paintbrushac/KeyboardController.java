@@ -27,8 +27,9 @@ public class KeyboardController implements KeyboardHandler {
                 KeyboardEvent.KEY_RIGHT,
                 KeyboardEvent.KEY_LEFT,
                 KeyboardEvent.KEY_SPACE,
-                KeyboardEvent.KEY_Z,
-                KeyboardEvent.KEY_S
+                KeyboardEvent.KEY_C,
+                KeyboardEvent.KEY_S,
+                KeyboardEvent.KEY_L
         };
 
         for (int key : keys){
@@ -87,9 +88,9 @@ public class KeyboardController implements KeyboardHandler {
         }
 
         /**
-         * Reset Grid
+         * Clear Grid
          */
-        if (keyboardEvent.getKey() == KeyboardEvent.KEY_Z) {
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_C) {
             grid.clear();
         }
 
@@ -99,6 +100,10 @@ public class KeyboardController implements KeyboardHandler {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_S) {
             System.out.println("Saving file...");
             grid.save();
+        }
+
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_L) {
+            grid.load();
         }
 
     }

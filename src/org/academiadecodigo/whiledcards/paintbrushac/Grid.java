@@ -101,18 +101,20 @@ public class Grid {
 
     public void save() {
 
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
+        for (int col = 0; col < cols; col++) {
+            for (int row = 0; row < rows; row++) {
+
                 try {
-                    fileWriter.write(String.valueOf( grid[col][row].isPainted()) + ",");
+
+                    if (grid[col][row].isPainted()) {
+                        fileWriter.write("1");
+                    } else {
+                        fileWriter.write("0");
+                    }
+
                 } catch (IOException e) {
-                    System.out.println("IO Exception");
+                    e.printStackTrace();
                 }
-            }
-            try {
-                fileWriter.write(System.getProperty("line.separator"));
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         try {
@@ -124,13 +126,29 @@ public class Grid {
 
     public void load() {
 
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                //try {
-                  //  fileReader.read()
-                //}
+        clear();
+
+        for (int col = 0; col < cols; col++) {
+            for (int row = 0; row < rows; row++) {
+
+                try {
+
+                    System.out.println(fileReader.read());
+                    if (fileReader.read() == 49) {
+                        grid[col][row].useBrush();
+                    }
+
+                } catch(IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
+
+    }
+
+    private void toGrid() {
+
     }
 
 }
