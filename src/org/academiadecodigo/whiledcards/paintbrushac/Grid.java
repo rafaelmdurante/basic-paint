@@ -26,8 +26,6 @@ public class Grid {
         createOuterRect();
         createGrid();
         createCells();
-        createFileWriter();
-        createFileReader();
     }
 
     // Getters and Setters
@@ -101,6 +99,8 @@ public class Grid {
 
     public void save() {
 
+        createFileWriter();
+
         for (int col = 0; col < cols; col++) {
             for (int row = 0; row < rows; row++) {
 
@@ -116,7 +116,15 @@ public class Grid {
                     e.printStackTrace();
                 }
             }
+
+            try {
+                fileWriter.write("\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
+
         try {
             fileWriter.close();
         } catch (IOException e) {
@@ -126,22 +134,22 @@ public class Grid {
 
     public void load() {
 
+        createFileReader();
+
         clear();
 
+        String line = "";
+
         for (int col = 0; col < cols; col++) {
+            try {
+                line = bReader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             for (int row = 0; row < rows; row++) {
-
-                try {
-
-                    System.out.println(fileReader.read());
-                    if (fileReader.read() == 49) {
-                        grid[col][row].useBrush();
-                    }
-
-                } catch(IOException e) {
-                    e.printStackTrace();
+                if (line.charAt(row) == 49) {
+                    grid[col][row].useBrush();
                 }
-
             }
         }
 
